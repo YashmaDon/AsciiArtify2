@@ -5,6 +5,7 @@ https://argo-cd.readthedocs.io/en/stable/assets/argocd_architecture.png
 
 ## Demo AgroCD 
 If you make changes to the repository, the called sync process will get the latest version of the git repository and compare it to the current state. In the demonstrated example, you can see that the service type for ambassador has changed from NodePort to LoadBalancer and the Kubernetes manifest has been updated accordingly
+
 ![Image](./DemoArgoMVP.gif)
 
 ArgoCD implements a GitOps approach using the Git repository as the source of truth to determine the desired state of the application. Kubernetes manifests can be specified in several ways.
