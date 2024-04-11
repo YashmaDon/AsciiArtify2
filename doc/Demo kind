@@ -1,0 +1,57 @@
+max@cloudshell:~/demo$ cloudshellkind get cluster
+ERROR: unknown command "cluster" for "kind get"
+max@cloudshell:~/demo$ cloudshellkind get clusters
+No kind clusters found.
+max@cloudshell:~/demo$ cloudshellkind create cluster
+Creating cluster "kind" ...
+ ✓ Ensuring node image (kindest/node:v1.25.2) 🖼
+ ✓ Preparing nodes 📦
+ ✓ Writing configuration 📜
+ ✓ Starting control-plane 🕹️
+ ✓ Installing CNI 🔌
+ ✓ Installing StorageClass 💾
+Set kubectl context to "kind-kind"
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-kind
+
+Not sure what to do next? 😅  Check out https://kind.sigs.k8s.io/docs/user/quick-start/
+max@cloudshell:~/demo$ alias k=kubectl
+max@cloudshell:~/demo$ k cluster-info
+Kubernetes control plane is running at https://127.0.0.1:44851
+CoreDNS is running at https://127.0.0.1:44851/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+max@cloudshell:~/demo$ k get nodes
+NAME                 STATUS   ROLES           AGE   VERSION
+kind-control-plane   Ready    control-plane   52s   v1.25.2
+max@cloudshell:~/demo$ k get pods
+No resources found in default namespace.
+max@cloudshell:~/demo$ k run test --restart=Never --rm --image=hello-world -it
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+pod "test" deleted
+max@cloudshell:~/demo$ cloudshellkind delete cluster
+Deleting cluster "kind" ...
+max@cloudshell:~/demo$ cloudshell
+exit

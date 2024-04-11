@@ -1,0 +1,98 @@
+max@cloudshell:~/demo$ cloudshellminikube status
+* Profile "minikube" not found. Run "minikube profile list" to view all profiles.
+  To start a cluster, run: "minikube start"
+max@cloudshell:~/demo$ cloudshellminikube start
+* minikube v1.32.0 on Debian 11.9 (amd64)
+  - MINIKUBE_FORCE_SYSTEMD=true
+  - MINIKUBE_HOME=/google/minikube
+  - MINIKUBE_WANTUPDATENOTIFICATION=false
+* Automatically selected the docker driver. Other choices: none, ssh
+* Using Docker driver with root privileges
+* Starting control plane node minikube in cluster minikube
+* Pulling base image ...
+* Downloading Kubernetes v1.28.3 preload ...
+    > preloaded-images-k8s-v18-v1...:  403.35 MiB / 403.35 MiB  100.00% 40.36 M
+    > gcr.io/k8s-minikube/kicbase...:  453.90 MiB / 453.90 MiB  100.00% 37.74 M
+* Creating docker container (CPUs=2, Memory=4000MB) ...
+
+X Docker is nearly out of disk space, which may cause deployments to fail! (94% of capacity). You can pass '--force' to skip this check.
+* Suggestion:
+
+    Try one or more of the following to free up space on the device:
+
+    1. Run "docker system prune" to remove unused Docker data (optionally with "-a")
+    2. Increase the storage allocated to Docker for Desktop by clicking on:
+    Docker icon > Preferences > Resources > Disk Image Size
+    3. Run "minikube ssh -- docker system prune" if using the Docker container runtime
+* Related issue: https://github.com/kubernetes/minikube/issues/9024
+
+* Preparing Kubernetes v1.28.3 on Docker 24.0.7 ...
+  - kubelet.cgroups-per-qos=false
+  - kubelet.enforce-node-allocatable=""
+  - Generating certificates and keys ...
+  - Booting up control plane ...
+  - Configuring RBAC rules ...
+* Configuring bridge CNI (Container Networking Interface) ...
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v5
+* Verifying Kubernetes components...
+* Enabled addons: storage-provisioner, default-storageclass
+* Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+max@cloudshell:~/demo$ cloudshellminikube status
+minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+
+max@cloudshell:~/demo$ cloudshellalias k=kubectl
+max@cloudshell:~/demo$ cloudshellk kluster -info
+error: unknown command "kluster" for "kubectl"
+max@cloudshell:~/demo$ cloudshellk cluster -info
+error: unknown command "cluster" for "kubectl"
+
+Did you mean this?
+        cluster-info
+max@cloudshell:~/demo$ cloudshellk cluster-info
+Kubernetes control plane is running at https://192.168.49.2:8443
+CoreDNS is running at https://192.168.49.2:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+max@cloudshell:~/demo$ cloudshellk get nods
+error: the server doesn't have a resource type "nods"
+max@cloudshell:~/demo$ cloudshellk get nodes
+NAME       STATUS   ROLES           AGE     VERSION
+minikube   Ready    control-plane   2m37s   v1.28.3
+max@cloudshell:~/demo$ cloudshellk get pods
+No resources found in default namespace.
+max@cloudshell:~/demo$ cloudshellk run test --restart=Never --rm --image=hello-world -it
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+pod "test" deleted
+max@cloudshell:~/demo$ cloudshellminikube delete
+* Deleting "minikube" in docker ...
+* Deleting container "minikube" ...
+* Removing /google/minikube/.minikube/machines/minikube ...
+* Removed all traces of the "minikube" cluster.
+max@cloudshell:~/demo$ cloudshell
+exit

@@ -1,0 +1,72 @@
+max@cloudshell:~/demo$ cloudshellk3d version
+k3d version v5.6.0
+k3s version v1.27.4-k3s1 (default)
+max@cloudshell:~/demo$ k3d cluster create demo
+INFO[0000] Prep: Network
+INFO[0000] Created network 'k3d-demo'
+INFO[0000] Created image volume k3d-demo-images
+INFO[0000] Starting new tools node...
+INFO[0001] Pulling image 'ghcr.io/k3d-io/k3d-tools:5.6.0'
+INFO[0001] Creating node 'k3d-demo-server-0'
+INFO[0001] Pulling image 'docker.io/rancher/k3s:v1.27.4-k3s1'
+INFO[0001] Starting Node 'k3d-demo-tools'
+INFO[0005] Creating LoadBalancer 'k3d-demo-serverlb'
+INFO[0005] Pulling image 'ghcr.io/k3d-io/k3d-proxy:5.6.0'
+INFO[0008] Using the k3d-tools node to gather environment information
+INFO[0008] HostIP: using network gateway 172.19.0.1 address
+INFO[0008] Starting cluster 'demo'
+INFO[0008] Starting servers...
+INFO[0008] Starting Node 'k3d-demo-server-0'
+INFO[0012] All agents already running.
+INFO[0012] Starting helpers...
+INFO[0012] Starting Node 'k3d-demo-serverlb'
+INFO[0019] Injecting records for hostAliases (incl. host.k3d.internal) and for 2 network members into CoreDNS configmap...
+INFO[0021] Cluster 'demo' created successfully!
+INFO[0021] You can now use it like this:
+kubectl cluster-info
+max@cloudshell:~/demo$ alias k=kubectl
+max@cloudshell:~/demo$ k cluster-info
+Kubernetes control plane is running at https://0.0.0.0:36825
+CoreDNS is running at https://0.0.0.0:36825/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+Metrics-server is running at https://0.0.0.0:36825/api/v1/namespaces/kube-system/services/https:metrics-server:https/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+max@cloudshell:~/demo$ k get nodes
+NAME                STATUS   ROLES                  AGE   VERSION
+k3d-demo-server-0   Ready    control-plane,master   38s   v1.27.4+k3s1
+max@cloudshell:~/demo$ k run test --restart=Never --rm --image=hello-world -it
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+pod "test" deleted
+max@cloudshell:~/demo$ clget pods
+No resources found in default namespace.
+max@cloudshell:~/demo$ k3d delete cluster demo
+Error: unknown command "delete" for "k3d"
+Run 'k3d --help' for usage.
+FATA[0000] unknown command "delete" for "k3d"
+max@cloudshell:~/demo$ cloudshellk3d delete cluster
+Error: unknown command "delete" for "k3d"
+Run 'k3d --help' for usage.
+FATA[0000] unknown command "delete" for "k3d"
+max@cloudshell:~/demo$ cloudshell
+exit
