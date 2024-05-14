@@ -1,3 +1,22 @@
+# Встановлення тестового стеку:
+OpenTelemetry
+Prometheus
+Fluentbit
+Grafana Loki
+Grafana
+
+# 1. Використовуємо docker-compose на основі підготовленого Yaml файлу у репі https://github.com/den-vasyliev/kbot
+# 2. Docker compose піднімає всі компоненти...
+docker-compose -f otel/docker-compose.yaml up
+![img](Im01.png)
+
+# ...та виводить логи в термінал
+![img](Im02.png)
+
+# 3. MetricsExporter та collector-1 відпрацювали і вже відправили метрики. Значення метрики збільшується після кожної команди застосунку.
+![img](Im1.png)
+
+# Щодо ASCIIArtify
 # Let's KIK!
 
 #
